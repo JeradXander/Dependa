@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/Dependapotamus.iml" filepath="$PROJECT_DIR$/Dependapotamus.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Dependapot.iml" filepath="$PROJECT_DIR$/Dependapot.iml" />
     </modules>
   </component>
 </project>
