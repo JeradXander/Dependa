@@ -12,7 +12,7 @@ public class RPC implements iMinigame{
 
         String userName = myObj.nextLine();  // Read user input
         System.out.println("Username is: " + userName);  // Output user input
-
+        System.out.println("egwegegwegegew");
         return false;
     }
 }
