@@ -121,8 +121,8 @@ public class TextParser {
         } else if (postType.equals("Fort Bliss")) {
             // switch case for fort bliss
             switch (nounInput) {
-                case "Starbucks":
-                case "Freedom crossing":
+                case "starbucks":
+                case "freedom crossing":
                 case "house":
                 case "restaurant":
                 case "theater":
@@ -163,7 +163,11 @@ public class TextParser {
         System.out.println(response);
         String noun = response.getNoun();
         String verb = response.getVerb();
+        System.out.println(noun);
+        System.out.println(verb);
 
+        response = text.receiveAction("go dfac", "Fort Sill");
+        System.out.println(response);
         // expected verb = "go"
         //
         /*System.out.println(text.receiveAction("go DFAC"));

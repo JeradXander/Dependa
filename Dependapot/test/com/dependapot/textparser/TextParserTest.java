@@ -21,4 +21,104 @@ public class TextParserTest {
         assertEquals("dfac", actualNoun);
         System.out.println("receiveActionSuccessForSill Pass");
     }
+
+    @Test
+    public void receiveActionSuccessForBliss() {
+        String successResponse = "move starbucks";
+        response = textParser.receiveAction(successResponse, FORTBLISS);
+        String actualVerb = response.getVerb();
+        String actualNoun = response.getNoun();
+        System.out.println(actualVerb);
+        assertEquals("move", actualVerb);
+        assertEquals("starbucks", actualNoun);
+        System.out.println("receiveActionSuccessForBliss Pass");
+    }
+
+    @Test
+    public void receiveActionEmptyInputFortSill() {
+        // it returns an empty string when we get empty string from user
+        String emptyResponse = "";
+        response = textParser.receiveAction(emptyResponse, FORTSILL);
+        String actualVerb = response.getVerb();
+        String actualNoun = response.getNoun();
+        assertEquals("", actualVerb);
+        assertEquals("", actualNoun);
+        System.out.println("receiveActionEmptyInput Pass");
+    }
+
+    @Test
+    public void receiveActionEmptyInputFortBliss() {
+        String emptyResponse = "";
+        response = textParser.receiveAction(emptyResponse, FORTBLISS);
+        String actualVerb = response.getVerb();
+        String actualNoun = response.getNoun();
+        assertEquals("", actualVerb);
+        assertEquals("", actualNoun);
+    }
+
+    @Test
+    public void receiveActionNullInputFortSill() {
+        // if the input is null somehow, it should return empty string
+        String nullResponse = null;
+        response = textParser.receiveAction(nullResponse, FORTSILL);
+        String actualVerb = response.getVerb();
+        String actualNoun = response.getNoun();
+        assertEquals("", actualVerb);
+        assertEquals("", actualNoun);
+    }
+
+    @Test
+    public void receiveActionNullInputFortBliss() {
+        String nullResponse = null;
+        response = textParser.receiveAction(nullResponse, FORTBLISS);
+        String actualVerb = response.getVerb();
+        String actualNoun = response.getNoun();
+        assertEquals("", actualVerb);
+        assertEquals("", actualNoun);
+    }
+
+    @Test
+    public void receiveActionInvalidActionFortSill() {
+        // invalid verb should return empty string
+        String invalidActionVerb = " ge eez";
+        response = textParser.receiveAction(invalidActionVerb, FORTSILL);
+        String actualVerb = response.getVerb();
+        String actualNoun = response.getNoun();
+        assertEquals("", actualVerb);
+        assertEquals("", actualNoun);
+    }
+
+    @Test
+    public void receiveActionInvalidActionFortBliss() {
+        String invalidActionVerb = "asdfasdf asdf";
+        response = textParser.receiveAction(invalidActionVerb, FORTBLISS);
+        String actualVerb = response.getVerb();
+        String actualNoun = response.getNoun();
+        assertEquals("", actualVerb);
+        assertEquals("", actualNoun);
+    }
+
+    @Test
+    public void receiveActionInvalidNounFortSill() {
+        // invalid noun
+        // should return both verb and noun with empty string
+        String invalidActionNoun = "move asdf";
+        response = textParser.receiveAction(invalidActionNoun, FORTSILL);
+        String actualVerb = response.getVerb();
+        String actualNoun = response.getNoun();
+        assertEquals("", actualVerb);
+        assertEquals("", actualNoun);
+    }
+
+    @Test
+    public void receiveActionInvalidNounFortBliss() {
+        // invalid noun
+        // should return both verb and noun with empty string
+        String invalidActionNoun = "drive zxbzx";
+        response = textParser.receiveAction(invalidActionNoun, FORTBLISS);
+        String actualVerb = response.getVerb();
+        String actualNoun = response.getNoun();
+        assertEquals("", actualVerb);
+        assertEquals("", actualNoun);
+    }
 }
