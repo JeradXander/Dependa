@@ -80,6 +80,11 @@ public class TextParser {
             case "run":
                 isOperable = moveAction(nounInput, postType);
                 return isOperable;
+            case "talk":
+            case "approach":
+            case "interact":
+                isOperable = interactNPCAction(nounInput, postType);
+                return isOperable;
             // utilizing
 //            case "use":
 //            case "apply":
@@ -124,6 +129,43 @@ public class TextParser {
                 case "house":
                 case "restaurant":
                 case "theater":
+                    return true;
+                default:
+                    return false;
+            }
+        } else {
+            // place holder for now
+            return false;
+        }
+    }
+
+    // method for talking or interact with the NPC
+    // method for "go || move || drive || walk || run"
+    private boolean interactNPCAction(String nounInput, String postType) {
+        System.out.println("interact action");
+        if (postType.equals("Fort Sill")) {
+            // switch case for fort sill
+            switch (nounInput) {
+                case "e-1":
+                case "choi":
+                case "e-2":
+                case "park":
+                case "e-3":
+                case "king":
+                case "e-4":
+                case "e-5":
+                    return true;
+                default:
+                    return false;
+            }
+        } else if (postType.equals("Fort Bliss")) {
+            // switch case for fort bliss
+            switch (nounInput) {
+                case "e-5":
+                case "e-6":
+                case "e-7":
+                case "e-8":
+                case "e-9":
                     return true;
                 default:
                     return false;
