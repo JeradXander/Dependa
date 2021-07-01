@@ -104,7 +104,8 @@ import java.util.Scanner;
             System.out.println("Spell List: \n" +
                     "Multi-Cam Purse: The Dependa throws a Multi-cam purse that has their spouses rank sowed onto it. It it filled with fatty cakes and receipts from the PX.\n" +
                     "Bumper Sticker: The Dependa flashes a purple camo color sticker that states \"Army Wife! Toughest job in the Army!\n" +
-                    "LuLuRoe Business Card: The Dependa tries to coerce the target into the LuLuRoe pyramid scheme by throwing their business card at the target.");
+                    "LuLuRoe Business Card: The Dependa tries to coerce the target into the LuLuRoe pyramid scheme by throwing their business card at the target." +
+                    "");
 
         }
         private static void clearConsole() {
