@@ -29,7 +29,7 @@ public class TextParser {
         boolean isOperableCommend = operateUserAction(isValidActionInput, post);
         if (isOperableCommend) {
             // return verbAndNoun;
-            return new ParseResponse(getVerb(), getNoun());
+            return new ParseResponse(getNoun(), getVerb());
         }
         // placeholder
         return new ParseResponse("", "");
@@ -106,6 +106,7 @@ public class TextParser {
     private boolean moveAction(String nounInput, String postType) {
         System.out.println("Move action");
         if (postType.equals("Fort Sill")) {
+            // switch case for fort sill
             switch (nounInput) {
                 case "dfac":
                 case "barrack":
@@ -118,6 +119,7 @@ public class TextParser {
                     return false;
             }
         } else if (postType.equals("Fort Bliss")) {
+            // switch case for fort bliss
             switch (nounInput) {
                 case "Starbucks":
                 case "Freedom crossing":
@@ -167,9 +169,6 @@ public class TextParser {
         /*System.out.println(text.receiveAction("go DFAC"));
 
         System.out.println(text.receiveAction("run to the Barrack"));*/
-
-
-
     }
 
 }
