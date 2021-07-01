@@ -1,4 +1,4 @@
-package com.dependapot;
+package com.dependapot.character;
 
 public class Character {
     private String name = "Jon";
