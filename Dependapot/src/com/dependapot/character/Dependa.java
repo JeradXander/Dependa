@@ -1,4 +1,4 @@
-package com.dependapot;
+package com.dependapot.character;
 
 public class Dependa extends Character {
      private String special = "Baking";

@@ -1,5 +1,7 @@
 package com.dependapot;
 
+import com.dependapot.character.Dependa;
+
 public class Main {
 
     public static void main(String[] args) {
