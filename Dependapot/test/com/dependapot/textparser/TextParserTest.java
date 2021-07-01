@@ -23,15 +23,35 @@ public class TextParserTest {
     }
 
     @Test
+    public void receiveActionSuccessForInteractNPCFortSill() {
+        String successResponse = "talk to e-1";
+        response = textParser.receiveAction(successResponse, FORTSILL);
+        String actualVerb = response.getVerb();
+        String actualNoun = response.getNoun();
+        assertEquals("talk", actualVerb);
+        assertEquals("e-1", actualNoun);
+    }
+
+    @Test
     public void receiveActionSuccessForBliss() {
         String successResponse = "move starbucks";
         response = textParser.receiveAction(successResponse, FORTBLISS);
         String actualVerb = response.getVerb();
         String actualNoun = response.getNoun();
-        System.out.println(actualVerb);
+        // System.out.println(actualVerb);
         assertEquals("move", actualVerb);
         assertEquals("starbucks", actualNoun);
         System.out.println("receiveActionSuccessForBliss Pass");
+    }
+
+    @Test
+    public void receiveActionSuccessFortBliss() {
+        String successResponse = "talk e-7";
+        response = textParser.receiveAction(successResponse, FORTBLISS);
+        String actualVerb = response.getVerb();
+        String actualNoun = response.getNoun();
+        assertEquals("talk", actualVerb);
+        assertEquals("e-7", actualNoun);
     }
 
     @Test
@@ -126,4 +146,5 @@ public class TextParserTest {
         assertEquals("", actualVerb);
         assertEquals("", actualNoun);
     }
+
 }
