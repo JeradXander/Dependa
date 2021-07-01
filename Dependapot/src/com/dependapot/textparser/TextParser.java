@@ -1,9 +1,7 @@
 package com.dependapot.textparser;
 
 
-import java.util.ArrayList;
 
-// this
 public class TextParser {
     private String noun = null;
     private String verb = null;
@@ -22,7 +20,7 @@ public class TextParser {
     }
 
     // this method will return an arraylist that contains verb and noun order
-    // @return ArrayList<String>
+    // @return ParseResponse obj
     public ParseResponse receiveAction(String userActionInput, String post) {
         // trim the user action input
         boolean isValidActionInput = trimUserInput(userActionInput);
@@ -121,8 +119,8 @@ public class TextParser {
         } else if (postType.equals("Fort Bliss")) {
             // switch case for fort bliss
             switch (nounInput) {
-                case "Starbucks":
-                case "Freedom crossing":
+                case "starbucks":
+                case "freedom crossing":
                 case "house":
                 case "restaurant":
                 case "theater":
@@ -152,23 +150,20 @@ public class TextParser {
 
     // test method
     // this will be removed
-    public static void main(String[] args) {
-        TextParser text = new TextParser();
-        // expected verb = MOVE
-        // expected noun = DFAC
-        // post.getName() <- damian
-        ParseResponse response = text.receiveAction("Move to DFAC", "Fort Sill");
-        // expected verb = ""
-        // expected noun = ""
-        System.out.println(response);
-        String noun = response.getNoun();
-        String verb = response.getVerb();
-
-        // expected verb = "go"
-        //
-        /*System.out.println(text.receiveAction("go DFAC"));
-
-        System.out.println(text.receiveAction("run to the Barrack"));*/
-    }
+//    public static void main(String[] args) {
+//        TextParser text = new TextParser();
+//        // expected verb = MOVE
+//        // expected noun = DFAC
+//        // post.getName() <- damian
+//        ParseResponse response = text.receiveAction("Move to DFAC", "Fort Sill");
+//        System.out.println(response);
+//        String noun = response.getNoun();
+//        String verb = response.getVerb();
+//        System.out.println(noun);
+//        System.out.println(verb);
+//
+//        response = text.receiveAction("go dfac", "Fort Sill");
+//        System.out.println(response);
+//    }
 
 }
