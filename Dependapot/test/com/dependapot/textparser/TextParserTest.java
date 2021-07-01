@@ -69,6 +69,8 @@ public class TextParserTest {
 
     @Test
     public void receiveActionNullInputFortBliss() {
+        // testcase for null
+        // it should return empty string for both verb and noun
         String nullResponse = null;
         response = textParser.receiveAction(nullResponse, FORTBLISS);
         String actualVerb = response.getVerb();
@@ -79,6 +81,7 @@ public class TextParserTest {
 
     @Test
     public void receiveActionInvalidActionFortSill() {
+        // invalid verb
         // invalid verb should return empty string
         String invalidActionVerb = " ge eez";
         response = textParser.receiveAction(invalidActionVerb, FORTSILL);
@@ -90,6 +93,8 @@ public class TextParserTest {
 
     @Test
     public void receiveActionInvalidActionFortBliss() {
+        // invalid verb
+        // should return both verb and noun with empty string
         String invalidActionVerb = "asdfasdf asdf";
         response = textParser.receiveAction(invalidActionVerb, FORTBLISS);
         String actualVerb = response.getVerb();
