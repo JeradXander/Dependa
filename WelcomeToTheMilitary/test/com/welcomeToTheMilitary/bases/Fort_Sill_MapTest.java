@@ -39,7 +39,7 @@ public class Fort_Sill_MapTest {
         dfacSoldier.add(E2);
         dfacSoldier.add(E3);
         for (int i = 0; i < actualEnlist.size(); i++) {
-            assertNotEquals(dfacSoldier.get(i), actualEnlist.get(i));
+            assertEquals(dfacSoldier.get(i), actualEnlist.get(i));
         }
     }
 }

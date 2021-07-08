@@ -9,7 +9,7 @@ public class Attributes {
 
 //    public Attributes(int _strength, int _intellect, int _spells, int _vitality){
     public Attributes(int _strength, int _vitality){
-    this.strength = _strength;
+        this.strength = _strength;
 //        this.intellect = _intellect;
 //        this.spells = _spells;
         this.vitality = _vitality;
@@ -47,5 +47,13 @@ public class Attributes {
         vitality += _amount;
     }
 
-
+    @Override
+    public String toString() {
+        return "" +
+                "strength=" + strength +
+                ", intellect=" + intellect +
+                ", spells=" + spells +
+                ", vitality=" + vitality +
+                '}';
+    }
 }

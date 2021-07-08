@@ -105,8 +105,8 @@ public class Fort_Bliss_Map {
         this.buildings.put("starbucks", prepareSoldierInStarbucks());
         this.buildings.put("theater", prepareSoldierInTheater());
         this.buildings.put("gym", prepareSoldierInGym());
-        this.buildings.put("freedom crossing (mall)", prepareSoldierInMall());
-        this.buildings.put("anthony's pizza", prepareSoldierInAntPizza());
+        this.buildings.put("mall", prepareSoldierInMall());
+        this.buildings.put("pizza", prepareSoldierInAntPizza());
     }
 
     // helper method to set up the place with correct soldiers for housing

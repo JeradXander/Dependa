@@ -34,14 +34,24 @@ public class Weapons extends Item{
 //            }
 //
 
-
-
     public Attributes getAt(){
         return weaponAttr;
     }
+
     public int getLevel(){
         return level;
     }
 
+    // override toString method
+    public String getWeaponName() {
+        return this.getName();
+    }
 
+    @Override
+    public String toString() {
+        return "Weapons{name: " + getWeaponName() +
+                " weapon info: " + weaponAttr +
+                ", level:" + level +
+                '}';
+    }
 }

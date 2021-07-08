@@ -17,10 +17,6 @@ public Item(String _name){
     return name;
     }
 
-    public String toString(){
-    return name;
-    }
-
     public Attributes getAt(){
     return attr;
     }
@@ -42,5 +38,15 @@ public Item(String _name){
         return false;
     }
 
-
+    // toString method for print
+    @Override
+    public String toString() {
+        return "Item{" +
+                "name='" + name + '\'' +
+                ", attr=" + attr +
+                ", amount=" + amount +
+                ", stackable=" + stackable +
+                ", type='" + type + '\'' +
+                '}';
+    }
 }

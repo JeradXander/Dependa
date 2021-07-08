@@ -70,7 +70,7 @@ public class TextParser {
     }
 
     // operate action
-    private boolean operateUserAction(boolean isValidActionInput, String postType) {
+    private boolean operateUserAction(boolean isValidActionInput, String post) {
         if (!isValidActionInput) {
             System.out.println("Invalid action");
             return false;
@@ -85,19 +85,19 @@ public class TextParser {
             case "drive":
             case "walk":
             case "run":
-                isOperable = moveAction(nounInput, postType);
+                isOperable = moveAction(nounInput, post);
                 return isOperable;
             case "talk":
             case "approach":
             case "interact":
-                isOperable = interactNPCAction(nounInput, postType);
+                isOperable = interactNPCAction(nounInput, post);
                 return isOperable;
             case "show":
             case "display":
-                isOperable = displayMapAction(nounInput, postType);
+                isOperable = displayMapAction(nounInput, post);
                 return isOperable;
             case "help":
-                isOperable = helpAction(nounInput, postType);
+                isOperable = helpAction(nounInput, post);
                 return isOperable;
             case "exit":
             case "quit":
@@ -148,10 +148,11 @@ public class TextParser {
             // switch case for fort bliss
             switch (nounInput) {
                 case "starbucks":
-                case "freedom crossing":
-                case "house":
-                case "restaurant":
+                case "mall":
+                case "housing":
+                case "pizza":
                 case "theater":
+                case "gym":
                     return true;
                 default:
                     this.noun = "";
@@ -190,11 +191,20 @@ public class TextParser {
         } else if (postType.equals("Fort Bliss")) {
             // switch case for fort bliss
             switch (nounInput) {
-                case "e-5":
-                case "e-6":
-                case "e-7":
-                case "e-8":
-                case "e-9":
+                case "gary":
+                case "steve":
+                case "frank":
+                case "jose":
+                case "roger":
+                case "chip":
+                case "dylan":
+                case "ryan":
+                case "danny":
+                case "cody":
+                case "justin":
+                case "lambert":
+                case "andy":
+                case "stephen":
                     return true;
                 default:
                     this.noun = "";

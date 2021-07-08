@@ -4,6 +4,9 @@ import com.welcomeToTheMilitary.attributes.Inventory;
 import com.welcomeToTheMilitary.attributes.Item;
 
 public class ServiceMember extends Character {
+
+
+    private String postName = "Fort Sill";
     public int heal;
     public int level;
     private String special = "Baking";
@@ -61,6 +64,14 @@ public class ServiceMember extends Character {
 
     public void setStrength(int _strength) {
         this.strength = _strength;
+    }
+
+    public String getPostName() {
+        return postName;
+    }
+
+    public void setPostName(String postName) {
+        this.postName = postName;
     }
 
     // method to obtain item and store it in the inventory

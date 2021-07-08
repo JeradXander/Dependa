@@ -21,6 +21,18 @@ public class FinalBoss{
         this.cidWeapon = cidWeapon;
     }
 
+    public String getRank() {
+        return this.rank;
+    }
+
+    public Weapons getCidWeapon() {
+        return this.cidWeapon;
+    }
+
+    public String getName() {
+        return this.name;
+    }
+
     public int attack(){
         int max = 9;
         int min = 2;
@@ -41,10 +53,13 @@ public class FinalBoss{
         this.vitality = this.vitality - damage;
     }
 
+    public String fortSillFinalBossSpeech() {
+        return "The Final Boss has appeared. Defeat him or you will be demoted back to E-1.";
+    }
+
     @Override
     public String toString() {
-        return "The Final Boss has appeared. Defeat him or you will be demoted back to E-1. {" +
-                "Rank: " + rank +
+        return "FortSill Final Boss: {  Rank: " + rank +
                 ", Name: " + name +
                 ", Weapon: " + cidWeapon +
                 ", Strength: " + strength +
@@ -52,10 +67,9 @@ public class FinalBoss{
                 '}';
     }
 
-
-    public static void main(String[] args) {
-        FinalBoss ssg = new FinalBoss("SFC", "Daniels", 20,30,new Weapons("Fists",5,5,5));
-        System.out.println(ssg);
-        System.out.println(ssg.attack());
-    }
+//    public static void main(String[] args) {
+//        FinalBoss ssg = new FinalBoss("SFC", "Daniels", 20,30,new Weapons("Fists",5,5,5));
+//        System.out.println(ssg);
+//        System.out.println(ssg.attack());
+//    }
 }
