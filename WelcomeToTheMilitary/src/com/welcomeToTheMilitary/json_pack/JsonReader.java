@@ -1,9 +1,8 @@
 package com.welcomeToTheMilitary.json_pack;
 
 import com.welcomeToTheMilitary.character.ServiceMember;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.io.IOException;
+
+import java.io.*;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -14,7 +13,9 @@ import org.json.simple.parser.ParseException;
 
 public class JsonReader {
 
-    private static String path = JsonReader.class.getProtectionDomain().getCodeSource().getLocation().getPath();
+    private Reader reader = null;
+    private InputStream inputFileOutputJSON = JsonReader.class.getResourceAsStream("/output.json");
+    private InputStream inputFileSpecialJSON = JsonReader.class.getResourceAsStream("/specials.json");
     public ServiceMember returnSolder(){
 
         //JSON parser object to parse read file
@@ -23,7 +24,8 @@ public class JsonReader {
 
 //        String path = JsonReader.class.getProtectionDomain().getCodeSource().getLocation().getPath();
 //        System.out.println("You are about to enter the JSon files" + path);
-        try (FileReader reader = new FileReader("jsonFiles/output.json"))
+        // try (FileReader reader = new FileReader("jsonFiles/output.json"))
+        try (BufferedReader reader = new BufferedReader(new InputStreamReader(inputFileOutputJSON)))
         {
             //Read JSON file
             Object obj = jsonParser.parse(reader);
@@ -50,7 +52,8 @@ public class JsonReader {
     public HashMap<String,String> getSpecials(){
         HashMap<String,String> specialHash = new HashMap<>();
         JSONParser jsonParser = new JSONParser();
-        try (FileReader reader = new FileReader( "jsonFiles/specials.json"))
+        // try (FileReader reader = new FileReader( "jsonFiles/specials.json"))
+        try (BufferedReader reader = new BufferedReader(new InputStreamReader(inputFileSpecialJSON)))
         {
             //Read JSON file
             JSONObject obj = (JSONObject) jsonParser.parse(reader);
@@ -74,8 +77,12 @@ public class JsonReader {
 
     public static void printHelpRequestDataFromJSON() {
         JSONParser parser = new JSONParser();
-        try {
-            JSONObject helpObject = (JSONObject) parser.parse(new FileReader("jsonFiles/possibleVerbandNoun.json"));
+        InputStream inputFilePossibleVerbAndNounJSON = JsonReader.class.getResourceAsStream("/possibleVerbAndNoun.json");
+        try (BufferedReader reader = new BufferedReader(new InputStreamReader(inputFilePossibleVerbAndNounJSON, "UTF-8")))
+        {
+            Object helpObjectObj = parser.parse(reader);
+            JSONObject helpObject = (JSONObject) helpObjectObj;
+            // helpObject = (JSONObject) parser.parse(new FileReader("jsonFiles/possibleVerbandNoun.json"));
             helpObject.keySet().forEach(eachInstruction -> {
                 System.out.println("=".repeat(5) + " " + eachInstruction + " " + "=".repeat(5));
                 JSONObject instructionSet = (JSONObject) helpObject.get(eachInstruction);
