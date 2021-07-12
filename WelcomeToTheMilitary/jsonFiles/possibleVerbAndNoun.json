@@ -1,20 +1,55 @@
 {
-  "Movement": {
-    "verb": ["go", "move", "drive", "walk", "run"],
-    "noun": ["dfac", "barracks", "church", "px", "market", "gym"],
-    "example": "Example: go dfac | move dfac"
-  },
+  "Fort Sill":
+  {
+    "Movement": {
+      "verb": ["go", "move", "drive", "walk", "run", "march"],
+      "noun": ["dfac", "barracks", "church", "px", "market", "gym"],
+      "example": "Example: go dfac | move dfac"
+    },
 
-  "Interact with soldier": {
-    "verb": ["talk", "approach", "interact"],
-    "noun": ["brad", "jeremy", "rogers", "shad", "arturo", "john", "brandon",
-      "laginus", "soko", "david", "stephen"],
-    "example": "Example: talk brad | approach brad"
-  },
+    "Interact with soldier": {
+      "verb": ["talk", "approach", "interact", "communicate", "motivate"],
+      "noun": ["brad", "jeremy", "rogers", "shad", "arturo", "john", "brandon",
+        "laginus", "soko", "david", "stephen"],
+      "example": "Example: talk brad | approach brad"
+    },
 
-  "Display map": {
-    "verb": ["show", "display"],
-    "noun": ["map", "location", "buildings", "building"],
-    "example": "Example: | display map | show map"
+    "Display map": {
+      "verb": ["show", "display"],
+      "noun": ["map", "location", "buildings", "building"],
+      "example": "Example: | display map | show map"
+    },
+
+    "Exit the game": {
+      "verb": ["exit", "quit"],
+      "noun": ["game"],
+      "example": "Example: | exit game | quit game"
+    }
+  },
+  "Fort Bliss": {
+    "Movement": {
+      "verb": ["go", "move", "drive", "walk", "run", "march"],
+      "noun": ["starbucks", "mall", "housing", "pizza", "theater", "gym"],
+      "example": "Example: go dfac | move dfac"
+    },
+
+    "Interact with soldier": {
+      "verb": ["talk", "approach", "interact", "communicate"],
+      "noun": ["gary", "steve", "frank", "jose", "roger", "chip", "dylan",
+        "ryan", "danny", "cody", "justin", "lambert", "andy", "stephen"],
+      "example": "Example: talk cody | approach roger"
+    },
+
+    "Display map": {
+      "verb": ["show", "display"],
+      "noun": ["map", "location", "buildings", "building"],
+      "example": "Example: | display map | show map"
+    },
+
+    "Exit the game": {
+      "verb": ["exit", "quit"],
+      "noun": ["game"],
+      "example": "Example: | exit game | quit game"
+    }
   }
 }

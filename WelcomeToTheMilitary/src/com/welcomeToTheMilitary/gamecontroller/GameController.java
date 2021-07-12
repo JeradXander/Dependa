@@ -28,7 +28,7 @@ public class GameController {
 
     // minigame
     private static FinalBoss fortSillFinalBoss =
-            new FinalBoss("SFC", "Daniels", 1, 1, new Weapons("Fists", 5, 5, 5));
+            new FinalBoss("SFC", "Daniels", 1, 1);
     private static MinigameFactory gameFactory = new MinigameFactory();
     private static iMinigame minigame = null;
     private static iMinigame rockPaperScissors = new RPC();
@@ -49,14 +49,13 @@ public class GameController {
                 System.out.println("Reached E-6...");
                 System.out.println("Final Challenge!");
                 minigame = gameFactory.playGame("fort sill game");
-                boolean isWon = minigame.play(usrSM, fortSillFinalBoss);
+                boolean isWon = minigame.play(usrSM);
                 // if player won
                 if (isWon) {
                     System.out.println("Your journey in Fort Sill is over soldier..");
                     usrSM.setPostName("Fort Bliss");
                     counter = 9000000;
 //                    break;
-
                 }
             }
             if (counter == 0) {
@@ -232,7 +231,7 @@ public class GameController {
 //                System.out.println("Thanks for playing");
 //                System.exit(0);
             default:
-                JsonReader.printHelpRequestDataFromJSON();
+                HelpmeHelper.printHelpRequestDataFromJSON(usrDep);
         }
     }
 

@@ -6,27 +6,21 @@ import java.util.Random;
 public class FinalBoss{
     private String rank;
     private String name;
-    private Weapons cidWeapon = new Weapons("Baton", 10,15,6);
     private int strength;
     private int vitality;
 
 
     //public Weapons(String _name,int strength, int vitality, int level){
     //CID soldier is the final boss
-    public FinalBoss (String rank, String name, int _strength, int _vitality, Weapons cidWeapon){
+    public FinalBoss (String rank, String name, int _strength, int _vitality){
         this.strength = _strength;
         this.vitality = _vitality;
         this.rank = rank;
         this.name = name;
-        this.cidWeapon = cidWeapon;
     }
 
     public String getRank() {
         return this.rank;
-    }
-
-    public Weapons getCidWeapon() {
-        return this.cidWeapon;
     }
 
     public String getName() {
@@ -61,7 +55,6 @@ public class FinalBoss{
     public String toString() {
         return "FortSill Final Boss: {  Rank: " + rank +
                 ", Name: " + name +
-                ", Weapon: " + cidWeapon +
                 ", Strength: " + strength +
                 ", Vitality: " + vitality +
                 '}';
