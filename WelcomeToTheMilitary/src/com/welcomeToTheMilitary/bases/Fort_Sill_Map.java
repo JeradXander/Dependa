@@ -37,11 +37,11 @@ public class Fort_Sill_Map {
     // only being used in the fort sill map class
     private void setUpItems() {
         this.itemBasedOnFacility = new HashMap<>();
-        itemBasedOnFacility.put("DFAC", new Item("Dehydrate Eggs").getName());
-        itemBasedOnFacility.put("PX", new Item("Mechanix gloves").getName());
-        itemBasedOnFacility.put("Church", new Item("chaplain's voice").getName());
-        itemBasedOnFacility.put("Gym", new Item("PT Belt").getName());
-        itemBasedOnFacility.put("Barracks", new Item("Dentist Appointment Slip").getName());
+        itemBasedOnFacility.put("dfac", new Item("Dehydrate Eggs").getName());
+        itemBasedOnFacility.put("px", new Item("Mechanix gloves").getName());
+        itemBasedOnFacility.put("church", new Item("chaplain's voice").getName());
+        itemBasedOnFacility.put("gym", new Item("PT Belt").getName());
+        itemBasedOnFacility.put("barracks", new Item("Dentist Appointment Slip").getName());
     }
 
     // method to grab name of the post

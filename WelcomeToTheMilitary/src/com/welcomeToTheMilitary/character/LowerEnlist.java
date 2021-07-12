@@ -1,13 +1,14 @@
 package com.welcomeToTheMilitary.character;
 
-public class LowerEnlist {
+public class LowerEnlist extends Character{
     private String rank;
     private String name;
     private String attribute;
 // Constructor
     public LowerEnlist(String _name, String _attribute, String _rank)
     {
-        this.name = _name;
+        super(_name);
+        name = super.getName();
         this.attribute = _attribute;
         this.rank = _rank;
     }
@@ -23,9 +24,10 @@ public class LowerEnlist {
         return this.name;
     }
 
+
     @Override
     public String toString() {
         return "LowerEnlist{" +
-                "name ='" + name +'\'' + "attribute = '" + attribute + '\'' ;
+                "name ='" + super.getName() +'\'' + "attribute = '" + attribute + '\'' ;
     }
 }

@@ -1,0 +1,52 @@
+{
+  "Fort Sill": {
+    "jun": {
+      "synonym": ["jon", "damian", "jerad"],
+      "noun": ["haha!"]
+    },
+    "go": {
+      "synonym": ["move", "drive", "walk", "run", "march"],
+      "noun": ["dfac", "barracks", "church", "px", "market", "gym"]
+    },
+    "talk": {
+      "synonym": ["approach", "interact", "communicate", "motivate"],
+      "noun": ["brad", "jeremy", "rogers", "shad", "arturo", "john", "brandon",
+        "laginus", "soko", "david", "stephen"]
+    },
+    "show": {
+      "synonym": ["display"],
+      "noun": ["map", "location", "buildings", "building"]
+    },
+    "help": {
+      "synonym": ["advice"],
+      "noun": ["me", "it"]
+    },
+    "exit": {
+      "synonym": ["quit"],
+      "noun": ["game"]
+    }
+  },
+  "Fort Bliss": {
+    "go": {
+      "synonym": ["move", "drive", "walk", "run"],
+      "noun": ["starbucks", "mall", "housing", "pizza", "theater", "gym"]
+    },
+    "talk": {
+      "synonym": ["approach", "interact", "communicate"],
+      "noun": ["gary", "steve", "frank", "jose", "roger", "chip", "dylan",
+        "ryan", "danny", "cody", "justin", "lambert", "andy", "stephen"]
+    },
+    "show": {
+      "synonym": ["display"],
+      "noun": ["map", "location", "buildings", "building"]
+    },
+    "help": {
+      "synonym": ["advice"],
+      "noun": ["me", "it"]
+    },
+    "exit": {
+      "synonym": ["quit"],
+      "noun": ["game"]
+    }
+  }
+}

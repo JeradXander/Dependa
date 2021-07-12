@@ -1,38 +1,31 @@
-//package com.dependapot.bases;
-//
-//import com.dependapot.character.ServiceMember;
-//import com.dependapot.character.LowerEnlist;
-//import com.dependapot.textparser.ParseResponse;
-//import com.welcomeToTheMilitary.character.LowerEnlist;
-//
-//import java.util.ArrayList;
-//import java.util.HashMap;
-//import java.util.Map;
-//
-//public class Post {
-//    // method to grab name of the post
-//    public String getName() {
-//        return name;
-//    }
-//
-//    // method for enterToBuilding
-//    public void enterToBuilding(String building) {
-//        if (building == null || building.length() == 0) {
-//            System.out.println("Enter To Building method: invalid");
-//            return;
-//        }
-//        // need a method to get the solider from building
-//        ArrayList<LowerEnlist> foundedSolider = getSolider(building);
-//        System.out.println("You are entering the " + building);
-//        System.out.println("You find " + foundedSolider.size() + " soldier's from another company");
-//        System.out.println("You saw...");
-//        for (LowerEnlist eachSoldier : foundedSolider) {
-//            System.out.println("Name: " + eachSoldier.getName());
-//            System.out.println("Attribute: " + eachSoldier.getAttribute());
-//        }
-//        return;
-//    }
-//
-//}
+package com.welcomeToTheMilitary.bases;
+
+import com.welcomeToTheMilitary.character.LowerEnlist;
+import com.welcomeToTheMilitary.character.ServiceMember;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
+
+public class Post {
+ private String name;
+ private ServiceMember sm;
+
+
+ HashMap<String, ArrayList<String>> buildingsAndSoldiers = new HashMap<>();
+
+
+ private ArrayList<LowerEnlist> prepareSoldierInDfac() {
+        ArrayList<LowerEnlist> dfacSoldier = new ArrayList<>();
+        LowerEnlist E1 = new LowerEnlist("Brad", "High and Thight. Forever skinny", "E-1");
+        LowerEnlist E2 = new LowerEnlist("Jeremy", "Can dip a whole can of Skoal Wintergreen. Wears combat boots with his jeans", "E-2");
+        LowerEnlist E3 = new LowerEnlist("Rogers", "Has an associates in Political Science. Wears Nine Line Apparel. Says Hooah a lot", "E-3");
+        dfacSoldier.add(E1);
+        dfacSoldier.add(E2);
+        dfacSoldier.add(E3);
+        return dfacSoldier;
+    }
+
+}
 
 
