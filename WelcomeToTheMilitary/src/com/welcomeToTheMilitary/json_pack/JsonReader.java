@@ -16,6 +16,7 @@ public class JsonReader {
     private Reader reader = null;
     private InputStream inputFileOutputJSON = JsonReader.class.getResourceAsStream("/output.json");
     private InputStream inputFileSpecialJSON = JsonReader.class.getResourceAsStream("/specials.json");
+    private InputStream inputFileLocationsJSON = JsonReader.class.getResourceAsStream("/locations.json");
     public ServiceMember returnSolder(){
 
         //JSON parser object to parse read file
@@ -73,6 +74,61 @@ public class JsonReader {
         }
 
         return specialHash;
+    }
+
+    public ArrayList<String> getbuilStrings(String postname){
+        ArrayList<String> buildingsList = new ArrayList<>();
+        JSONParser jsonParser = new JSONParser();
+        // try (FileReader reader = new FileReader( "jsonFiles/specials.json"))
+        try (BufferedReader reader = new BufferedReader(new InputStreamReader(inputFileLocationsJSON)))
+        {
+            //Read JSON file
+            JSONObject obj = (JSONObject) jsonParser.parse(reader);
+
+            //Iterate over employee array
+            obj.keySet().forEach( eachLocation -> {
+
+                if(postname.equals("Fort Bliss") && eachLocation.toString().equals("Fort Bliss")){
+                    System.out.println(eachLocation.toString());
+                    JSONObject location = (JSONObject) obj.get(eachLocation);
+                    JSONArray buildArray = (JSONArray) location.get("buildings") ;
+
+                    for(int i = 0; i< buildArray.size();i++){
+                        buildingsList.add(buildArray.get(i).toString());
+                    }
+                }
+                else if (postname.equals("Fort Sill") && eachLocation.toString().equals("Fort Sill")){
+                    System.out.println(eachLocation.toString());
+                    JSONObject location = (JSONObject) obj.get(eachLocation);
+                    JSONArray buildArray = (JSONArray) location.get("buildings") ;
+
+                    for(int i = 0; i< buildArray.size();i++){
+                        buildingsList.add(buildArray.get(i).toString());
+                    }
+                }else if (postname.equals("Fort Drum") && eachLocation.toString().equals("Fort Drum")){
+                    System.out.println(eachLocation.toString());
+                    JSONObject location = (JSONObject) obj.get(eachLocation);
+
+                    JSONArray buildArray = (JSONArray) location.get("buildings") ;
+
+                    for(int i = 0; i< buildArray.size();i++){
+                        buildingsList.add(buildArray.get(i).toString());
+                    }
+                    System.out.println("dsafas");
+                     // buildingsList = (ArrayList<String>) buildings;
+                }
+
+            } );
+
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+
+        return buildingsList;
     }
 
     public static void printHelpRequestDataFromJSON() {

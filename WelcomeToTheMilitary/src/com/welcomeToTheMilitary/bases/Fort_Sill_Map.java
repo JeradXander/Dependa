@@ -1,7 +1,7 @@
 package com.welcomeToTheMilitary.bases;
 
 import com.welcomeToTheMilitary.attributes.Item;
-import com.welcomeToTheMilitary.character.LowerEnlist;
+import com.welcomeToTheMilitary.character.Enlisted;
 import com.welcomeToTheMilitary.character.WarrantOfficer;
 import com.welcomeToTheMilitary.textparser.ParseResponse;
 import com.welcomeToTheMilitary.textparser.TextParser;
@@ -14,7 +14,7 @@ public class Fort_Sill_Map {
     private final String description;
 
     // private -> updated CODE WITH Jun
-    private HashMap<String, ArrayList<LowerEnlist>> buildings = null;
+    private HashMap<String, ArrayList<Enlisted>> buildings = null;
     private String currentDependaLocation = null;
     private HashMap<String, String> itemBasedOnFacility = null;
 
@@ -56,11 +56,11 @@ public class Fort_Sill_Map {
             return;
         }
         // need a method to get the solider from building
-        ArrayList<LowerEnlist> foundedSolider = getSolider(building);
+        ArrayList<Enlisted> foundedSolider = getSolider(building);
         System.out.println("You are entering the " + building);
         System.out.println("You find " + foundedSolider.size() + " soldier's from another company");
         System.out.println("You saw...");
-        for (LowerEnlist eachSoldier : foundedSolider) {
+        for (Enlisted eachSoldier : foundedSolider) {
             System.out.println("Name: " + eachSoldier.getName());
             System.out.println("Attribute: " + eachSoldier.getAttribute());
         }
@@ -70,9 +70,9 @@ public class Fort_Sill_Map {
     //
 
     // going to get all the solider based on the building that is passed by parameter
-    public ArrayList<LowerEnlist> getSolider(String building) {
-        HashMap<String, ArrayList<LowerEnlist>> data = this.buildings;
-        ArrayList<LowerEnlist> enlists = data.get(building);
+    public ArrayList<Enlisted> getSolider(String building) {
+        HashMap<String, ArrayList<Enlisted>> data = this.buildings;
+        ArrayList<Enlisted> enlists = data.get(building);
         return enlists;
     }
     // get buildings for
@@ -93,8 +93,8 @@ public class Fort_Sill_Map {
         }
         String targetBuilding = building.trim();
         ArrayList<String> nameOfSoldiersInBuilding = new ArrayList<>();
-        ArrayList<LowerEnlist> soldiersInBuilding = buildings.get(targetBuilding);
-        for (LowerEnlist eachSoldier : soldiersInBuilding) {
+        ArrayList<Enlisted> soldiersInBuilding = buildings.get(targetBuilding);
+        for (Enlisted eachSoldier : soldiersInBuilding) {
             nameOfSoldiersInBuilding.add(eachSoldier.getName());
         }
         return nameOfSoldiersInBuilding;
@@ -134,59 +134,59 @@ private ArrayList<WarrantOfficer> warrantsInBliss(){
     }
 
     // helper method to set up the place with correct soldiers for the dfac
-    private ArrayList<LowerEnlist> prepareSoldierInDfac() {
-        ArrayList<LowerEnlist> dfacSoldier = new ArrayList<>();
-        LowerEnlist E1 = new LowerEnlist("Brad", "High and Thight. Forever skinny", "E-1");
-        LowerEnlist E2 = new LowerEnlist("Jeremy", "Can dip a whole can of Skoal Wintergreen. Wears combat boots with his jeans", "E-2");
-        LowerEnlist E3 = new LowerEnlist("Rogers", "Has an associates in Political Science. Wears Nine Line Apparel. Says Hooah a lot", "E-3");
+    private ArrayList<Enlisted> prepareSoldierInDfac() {
+        ArrayList<Enlisted> dfacSoldier = new ArrayList<>();
+        Enlisted E1 = new Enlisted("Brad", "High and Thight. Forever skinny", "E-1");
+        Enlisted E2 = new Enlisted("Jeremy", "Can dip a whole can of Skoal Wintergreen. Wears combat boots with his jeans", "E-2");
+        Enlisted E3 = new Enlisted("Rogers", "Has an associates in Political Science. Wears Nine Line Apparel. Says Hooah a lot", "E-3");
         dfacSoldier.add(E1);
         dfacSoldier.add(E2);
         dfacSoldier.add(E3);
         return dfacSoldier;
     }
     // helper method to set up the place with correct soldiers for the PX
-    private ArrayList<LowerEnlist> prepareSoldierInPX(){
-        ArrayList<LowerEnlist> pxSoldier = new ArrayList<>();
-        LowerEnlist E6 = new LowerEnlist("Shad", "Grumpy with gray hairs. Walks with a purpose.", "E-6");
+    private ArrayList<Enlisted> prepareSoldierInPX(){
+        ArrayList<Enlisted> pxSoldier = new ArrayList<>();
+        Enlisted E6 = new Enlisted("Shad", "Grumpy with gray hairs. Walks with a purpose.", "E-6");
 //        WarrantOfficer WO1 = new WarrantOfficer()
         pxSoldier.add(E6);
 // add Warrant Officer
         return pxSoldier;
     }
     // helper method to set up the place with correct soldiers for the Commissary
-    private ArrayList<LowerEnlist> prepareSoldierInCommissary(){
-        ArrayList<LowerEnlist> commSoldier = new ArrayList<>();
-        LowerEnlist E6 = new LowerEnlist("Arturo", "Always having a cookout. Dances with products as he puts them into his cart.", "E-6");
+    private ArrayList<Enlisted> prepareSoldierInCommissary(){
+        ArrayList<Enlisted> commSoldier = new ArrayList<>();
+        Enlisted E6 = new Enlisted("Arturo", "Always having a cookout. Dances with products as he puts them into his cart.", "E-6");
         commSoldier.add(E6);
         warrantsInBliss();
         return commSoldier;
     }
 
     // helper method to set up the place with correct soldiers for the church
-    private ArrayList<LowerEnlist> prepareSoldierInChurch(){
-        ArrayList<LowerEnlist> churchSoldier = new ArrayList<>();
-        LowerEnlist E4 = new LowerEnlist("Mason", "Hide n Seek Champion from his unit. Barracks Lawyer.", "E-4");
-        LowerEnlist E6 = new LowerEnlist("John", "Will pray with you and take you to choir practice.", "E-6");
+    private ArrayList<Enlisted> prepareSoldierInChurch(){
+        ArrayList<Enlisted> churchSoldier = new ArrayList<>();
+        Enlisted E4 = new Enlisted("Mason", "Hide n Seek Champion from his unit. Barracks Lawyer.", "E-4");
+        Enlisted E6 = new Enlisted("John", "Will pray with you and take you to choir practice.", "E-6");
         churchSoldier.add(E4);
         churchSoldier.add(E6);
         return churchSoldier;
     }
 
     // helper method to set up the place with correct soldiers for the gym
-    private ArrayList<LowerEnlist> prepareSoldierInGym(){
-        ArrayList<LowerEnlist> gymSoldier = new ArrayList<>();
-        LowerEnlist E5 = new LowerEnlist("Brandon", "Do you even lift, Bro.", "E-5");
+    private ArrayList<Enlisted> prepareSoldierInGym(){
+        ArrayList<Enlisted> gymSoldier = new ArrayList<>();
+        Enlisted E5 = new Enlisted("Brandon", "Do you even lift, Bro.", "E-5");
 // CID
         gymSoldier.add(E5);
         return gymSoldier;
     }
     // helper method to set up the place with correct soldiers for the Barracks
-    private ArrayList<LowerEnlist> prepareSoldierInBarracks(){
-        ArrayList<LowerEnlist> barracksSoldier = new ArrayList<>();
-        LowerEnlist E1 = new LowerEnlist("Laginus", "Got a DUI last week and avoids extra duty.", "E-1");
-        LowerEnlist E2 = new LowerEnlist("Soko", "Pot Belly. Always dirty because he's a mechanic. Never fixes anything tho.", "E-2");
-        LowerEnlist E3 = new LowerEnlist("David", "Just passed Ranger School. Lives off coffee and MRE's. Listens to Classic Rock.", "E-3");
-        LowerEnlist E4 = new LowerEnlist("Stephen", "Has a low-fade. Always preparing for SFAS. Won't tell you what it means.", "E-4");
+    private ArrayList<Enlisted> prepareSoldierInBarracks(){
+        ArrayList<Enlisted> barracksSoldier = new ArrayList<>();
+        Enlisted E1 = new Enlisted("Laginus", "Got a DUI last week and avoids extra duty.", "E-1");
+        Enlisted E2 = new Enlisted("Soko", "Pot Belly. Always dirty because he's a mechanic. Never fixes anything tho.", "E-2");
+        Enlisted E3 = new Enlisted("David", "Just passed Ranger School. Lives off coffee and MRE's. Listens to Classic Rock.", "E-3");
+        Enlisted E4 = new Enlisted("Stephen", "Has a low-fade. Always preparing for SFAS. Won't tell you what it means.", "E-4");
         barracksSoldier.add(E1);
         barracksSoldier.add(E2);
         barracksSoldier.add(E3);

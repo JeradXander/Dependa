@@ -118,7 +118,7 @@ public class RPC implements iMinigame{
 
     // placeholder for now, will figure it out
     @Override
-    public boolean play(ServiceMember usr, FinalBoss boss) {
+    public boolean play(ServiceMember usr) {
         return false;
     }
 

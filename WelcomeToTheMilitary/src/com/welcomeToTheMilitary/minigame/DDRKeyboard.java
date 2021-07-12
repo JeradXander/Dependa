@@ -69,7 +69,7 @@ public class DDRKeyboard implements iMinigame {
     }
 
     @Override
-    public boolean play(ServiceMember usr, FinalBoss boss) {
+    public boolean play(ServiceMember usr) {
         return false;
     }
 

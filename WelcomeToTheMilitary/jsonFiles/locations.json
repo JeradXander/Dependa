@@ -1,0 +1,12 @@
+{
+  "Fort Bliss": {
+    "buildings": ["housing", "starbucks", "theater", "gym" , "mall", "pizza"]
+  },
+  "Fort Sill": {
+    "buildings": ["dfac","px","market","church","gym","barracks"]
+  },
+  "Fort Drum": {
+    "buildings": ["dfac","px","market","church","gym","barracks"]
+  }
+}
+

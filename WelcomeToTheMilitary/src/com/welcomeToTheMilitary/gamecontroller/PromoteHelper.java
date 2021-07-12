@@ -1,14 +1,12 @@
 package com.welcomeToTheMilitary.gamecontroller;
 
-import com.welcomeToTheMilitary.character.LowerEnlist;
+import com.welcomeToTheMilitary.character.Enlisted;
 import com.welcomeToTheMilitary.character.SeniorEnlist;
 import com.welcomeToTheMilitary.character.ServiceMember;
 
-import java.security.Provider;
-
 public class PromoteHelper {
     // method to cover lower enlist and the player
-    public static boolean isRankWorthItFortSill(ServiceMember player, LowerEnlist soldier) {
+    public static boolean isRankWorthItFortSill(ServiceMember player, Enlisted soldier) {
         // if the rank is fuzzy then just promote
         if (player.getRank().equals("fuzzy")) {
             return true;

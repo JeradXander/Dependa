@@ -1,6 +1,6 @@
 package com.welcomeToTheMilitary.bases;
 
-import com.welcomeToTheMilitary.character.LowerEnlist;
+import com.welcomeToTheMilitary.character.Enlisted;
 import com.welcomeToTheMilitary.textparser.ParseResponse;
 import com.welcomeToTheMilitary.textparser.TextParser;
 import org.junit.Test;
@@ -17,11 +17,11 @@ public class Fort_Sill_MapTest {
 
     @Test
     public void getSoliderSuccessPath() {
-        ArrayList<LowerEnlist> actualEnlist = fort_sill_map.getSolider("dfac");
-        ArrayList<LowerEnlist> dfacSoldier = new ArrayList<>();
-        LowerEnlist E1 = new LowerEnlist("Brad", "High and Thight. Forever skinny", "e-1");
-        LowerEnlist E2 = new LowerEnlist("Jeremy", "Can dip a whole can of Skoal Wintergreen. Wears combat boots with his jeans", "e-2");
-        LowerEnlist E3 = new LowerEnlist("Rogers", "Has an associates in Political Science. Wears Nine Line Apparel. Says Hooah a lot", "e-3");
+        ArrayList<Enlisted> actualEnlist = fort_sill_map.getSolider("dfac");
+        ArrayList<Enlisted> dfacSoldier = new ArrayList<>();
+        Enlisted E1 = new Enlisted("Brad", "High and Thight. Forever skinny", "e-1");
+        Enlisted E2 = new Enlisted("Jeremy", "Can dip a whole can of Skoal Wintergreen. Wears combat boots with his jeans", "e-2");
+        Enlisted E3 = new Enlisted("Rogers", "Has an associates in Political Science. Wears Nine Line Apparel. Says Hooah a lot", "e-3");
         dfacSoldier.add(E1);
         dfacSoldier.add(E2);
         dfacSoldier.add(E3);
@@ -30,11 +30,11 @@ public class Fort_Sill_MapTest {
 
     @Test
     public void getSoliderFailPath() {
-        ArrayList<LowerEnlist> actualEnlist = fort_sill_map.getSolider("dfac");
-        ArrayList<LowerEnlist> dfacSoldier = new ArrayList<>();
-        LowerEnlist E1 = new LowerEnlist("brad", "High and Thight. Forever skinny", "e-1");
-        LowerEnlist E2 = new LowerEnlist("Jesadfremy", "Can dip a whole can of Skoal Wintergreen. Wears combat boots with his jeans", "e-2");
-        LowerEnlist E3 = new LowerEnlist("Rogxzcvers", "Has an associates in Political Science. Wears Nine Line Apparel. Says Hooah a lot", "e-3");
+        ArrayList<Enlisted> actualEnlist = fort_sill_map.getSolider("dfac");
+        ArrayList<Enlisted> dfacSoldier = new ArrayList<>();
+        Enlisted E1 = new Enlisted("brad", "High and Thight. Forever skinny", "e-1");
+        Enlisted E2 = new Enlisted("Jesadfremy", "Can dip a whole can of Skoal Wintergreen. Wears combat boots with his jeans", "e-2");
+        Enlisted E3 = new Enlisted("Rogxzcvers", "Has an associates in Political Science. Wears Nine Line Apparel. Says Hooah a lot", "e-3");
         dfacSoldier.add(E1);
         dfacSoldier.add(E2);
         dfacSoldier.add(E3);

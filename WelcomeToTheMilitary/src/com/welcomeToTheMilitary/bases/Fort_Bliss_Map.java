@@ -2,11 +2,8 @@ package com.welcomeToTheMilitary.bases;
 
 
 import com.welcomeToTheMilitary.attributes.Item;
-import com.welcomeToTheMilitary.character.LowerEnlist;
 import com.welcomeToTheMilitary.character.SeniorEnlist;
-import com.welcomeToTheMilitary.character.WarrantOfficer;
 import com.welcomeToTheMilitary.textparser.ParseResponse;
-import com.welcomeToTheMilitary.textparser.TextParser;
 
 import java.util.ArrayList;
 import java.util.HashMap;
