@@ -80,7 +80,7 @@ public class Post {
         allSoldiers.add(E9b);
         return allSoldiers;
     }
-    
+
 
     private HashMap<String, ArrayList<Enlisted>> buildingNSoldiersBuilder(){
 //    Building and soldiers and return hashmap HashMap<String, ArrayList<Character>>

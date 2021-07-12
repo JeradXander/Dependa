@@ -91,16 +91,31 @@ public class JsonReader {
                 if(postname.equals("Fort Bliss") && eachLocation.toString().equals("Fort Bliss")){
                     System.out.println(eachLocation.toString());
                     JSONObject location = (JSONObject) obj.get(eachLocation);
-                    buildingsList.add(location.get("buildings").toString());
+                    JSONArray buildArray = (JSONArray) location.get("buildings") ;
+
+                    for(int i = 0; i< buildArray.size();i++){
+                        buildingsList.add(buildArray.get(i).toString());
+                    }
                 }
                 else if (postname.equals("Fort Sill") && eachLocation.toString().equals("Fort Sill")){
                     System.out.println(eachLocation.toString());
                     JSONObject location = (JSONObject) obj.get(eachLocation);
-                    buildingsList.add(location.get("buildings").toString());
+                    JSONArray buildArray = (JSONArray) location.get("buildings") ;
+
+                    for(int i = 0; i< buildArray.size();i++){
+                        buildingsList.add(buildArray.get(i).toString());
+                    }
                 }else if (postname.equals("Fort Drum") && eachLocation.toString().equals("Fort Drum")){
                     System.out.println(eachLocation.toString());
                     JSONObject location = (JSONObject) obj.get(eachLocation);
-                    buildingsList.add(location.get("buildings").toString());
+
+                    JSONArray buildArray = (JSONArray) location.get("buildings") ;
+
+                    for(int i = 0; i< buildArray.size();i++){
+                        buildingsList.add(buildArray.get(i).toString());
+                    }
+                    System.out.println("dsafas");
+                     // buildingsList = (ArrayList<String>) buildings;
                 }
 
             } );

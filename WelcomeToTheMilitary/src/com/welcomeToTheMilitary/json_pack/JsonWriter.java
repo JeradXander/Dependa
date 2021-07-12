@@ -1,9 +1,12 @@
 package com.welcomeToTheMilitary.json_pack;
 
+import com.welcomeToTheMilitary.bases.Post;
+import com.welcomeToTheMilitary.character.Enlisted;
 import com.welcomeToTheMilitary.character.ServiceMember;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
@@ -74,6 +77,16 @@ class testMain {
         for (String name : testlist) {
             System.out.printf("building name" + name);
         }
+
+        Post fortBliss = new Post("Fort Drum", readServiceMember);
+        System.out.println("\nYou " + fortBliss.getName() );
+
+        HashMap<String,ArrayList<Enlisted>> blissHash = fortBliss.getBuildingsAndSoldiers();
+
+        blissHash.keySet().forEach( eachSpecial -> {
+            System.out.println("\n" + eachSpecial.toString());
+
+    });
     }
 
 
