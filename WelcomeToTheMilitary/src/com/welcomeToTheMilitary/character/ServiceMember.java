@@ -8,10 +8,8 @@ import com.welcomeToTheMilitary.json_pack.JsonReader;
 import java.util.HashMap;
 
 public class ServiceMember extends Character {
-    private JsonReader reader = null;
-
     private String postName = "Fort Sill";
-    public int heal;
+    public int healPotion;
     public int level;
     private String special = "Baking";
     private String location;
@@ -20,10 +18,12 @@ public class ServiceMember extends Character {
     private int health = 0;
     private int strength = 0;
 
+    // private Item items = null;
+    private String pcsRequest = null;
     // number of uses of spell
     private static int NUMBER_OF_USE_SPECIAL_ON_EACH_FINAL_BOSS = 3;
 
-// ServiceMember Constructor that pulls from Character class
+    // ServiceMember Constructor that pulls from Character class
     public ServiceMember(String _name, String _special, String _location ) {
         super(_name);
         this.special = _special;
@@ -31,11 +31,28 @@ public class ServiceMember extends Character {
         this.rank = "fuzzy"; // initial rank
         inventory = new Inventory();
         // this should be update everytime the soldier get promotes
-        this.health = 10;
+        this.health = 100;
         this.strength = 5;
-        // json reader
-         reader = new JsonReader();
+        pcsRequest = "No request (Type: request pcs to request a pcs)";
+        healPotion = 5;
     }
+
+    public int getHealPotion() {
+        return this.healPotion;
+    }
+
+    public void setHealPotion() {
+        this.healPotion -= 1;
+    }
+
+    public String getPcsRequest() {
+        return this.pcsRequest;
+    }
+
+    public void setPcsRequest(String _pcsRequest) {
+        this.pcsRequest = _pcsRequest;
+    }
+
     public String getName(){
         return super.getName();
     }
@@ -58,7 +75,7 @@ public class ServiceMember extends Character {
     public void setRank(String _rank) {
         // each level up health += 2
         // each level up strength += 2
-        this.setHealth( this.getHealth() + 2);
+        this.setHealth( this.getHealth() + 2, true);
         this.setStrength( this.getStrength()  + 2);
         this.rank = _rank;
     }
@@ -67,8 +84,12 @@ public class ServiceMember extends Character {
         return this.health;
     }
 
-    public void setHealth(int _health) {
-        this.health = _health;
+    public void setHealth(int _health, boolean isHeal) {
+        if (isHeal) {
+            this.health += _health;
+        } else {
+            this.health -= _health;
+        }
     }
 
     public int getStrength() {
@@ -88,36 +109,56 @@ public class ServiceMember extends Character {
     }
 
     // method to obtain item and store it in the inventory
-    public void storeItemInVentory(String itemName) {
-        System.out.println("Adding up the item: " + itemName);
-        inventory.addItem(new Item(itemName));
+    public void storeItemInVentory(Item itemName) {
+        // System.out.println("Adding up the item: " + itemName);
+        inventory.addItem(itemName);
     }
 
     public void viewMyInventory() {
         inventory.viewInventory();
     }
 
-    public String useItem(String _itemName) {
+    public Item useItem(String _itemName) {
+        System.out.println("Inside useItem method");
         // check if the item exist
         System.out.println(_itemName);
         boolean isItemExist = inventory.checkInventory(_itemName);
         if (isItemExist) {
+            Item usedItem = inventory.getItem(_itemName);
+            System.out.println(usedItem);
+            useItemHelper(usedItem.getType());
             System.out.println("You used " + _itemName);
-            return _itemName;
+            return usedItem;
         }
-        return "";
+        return null;
+    }
+
+    private void useItemHelper(String type) {
+        if (type == null) {
+            System.out.println("The item cannot be used (type does not exist)");
+            return;
+        }
+        switch (type.toLowerCase()) {
+            case "consumable":
+                System.out.println("consumable type heal hp");
+                this.setHealth(this.getHealth() + 5, true);
+                break;
+            case "effective":
+                System.out.println("effective type");
+                break;
+            case "weapon":
+                System.out.println("Weapon type attack damage increased!");
+                this.setStrength(this.getStrength() + 2);
+                break;
+            default:
+                System.out.println("The current item type is not supported");
+                break;
+        }
     }
 
     public int attack() {
 //        System.out.println("Attack: " + this.getStrength());
         return this.getStrength();
-    }
-
-    public int getHealth(String name, int heal) {
-       //super(name);
-        this.heal = heal;
-        //this.type = "Consumable";
-        return heal;
     }
 
     // setter to set Number of special the player can use to fight against boss
@@ -129,7 +170,6 @@ public class ServiceMember extends Character {
     public int getNumberOfUserSpecialOnEachFinalBoss() {
         return NUMBER_OF_USE_SPECIAL_ON_EACH_FINAL_BOSS;
     }
-
 
     public void decreaseNumberOfUseSpecialOnEachFinalBoss() {
         if (NUMBER_OF_USE_SPECIAL_ON_EACH_FINAL_BOSS > 0) {
@@ -181,14 +221,4 @@ public class ServiceMember extends Character {
                 + "\nInventory: " + inventory + "\n" + "=".repeat(20);
     }
 
-    public static void main(String[] args) {
-        // String _name, String _special, String _location
-        ServiceMember serviceMember = new ServiceMember("Park", "Dog Tags", "");
-        serviceMember.useSpecial();
-        serviceMember.useSpecial();
-        serviceMember.useSpecial();
-        System.out.println("====");
-        serviceMember.useSpecial();
-        serviceMember.useSpecial();
-    }
 }

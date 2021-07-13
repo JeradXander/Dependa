@@ -1,6 +1,5 @@
 package com.welcomeToTheMilitary.minigame;
 
-import com.welcomeToTheMilitary.attributes.Weapons;
 import com.welcomeToTheMilitary.boss.FortBlissFinalBoss;
 import com.welcomeToTheMilitary.boss.FortSillFinalBoss;
 import com.welcomeToTheMilitary.character.FinalBoss;
@@ -127,7 +126,7 @@ public class FinalBossFight implements iMinigame {
         switch (bossActionList[randomIndex]) {
             case "attack":
                 int bossHitDamage = boss.attack();
-                usr.setHealth(usr.getHealth() - bossHitDamage);
+                usr.setHealth(usr.getHealth() - bossHitDamage, false);
                 return;
             default:
                 System.out.println(bossActionList[randomIndex] + " is not implemented yet");

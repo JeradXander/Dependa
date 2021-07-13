@@ -1,0 +1,30 @@
+{
+  "boss": {
+    "attack": {
+      "synonym": [
+        "fight",
+        "damage"
+      ],
+      "noun": [
+        "boss",
+        "enemy"
+      ]
+    },
+    "use": {
+      "synonym": [
+        "utilize"
+      ]
+    },
+    "view": {
+      "synonym": [
+        "display",
+        "show"
+      ],
+      "noun": [
+        "inventory",
+        "items",
+        "item"
+      ]
+    }
+  }
+}

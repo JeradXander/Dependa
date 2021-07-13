@@ -4,8 +4,10 @@ package com.welcomeToTheMilitary.bases;
 import com.welcomeToTheMilitary.attributes.Item;
 import com.welcomeToTheMilitary.character.SeniorEnlist;
 import com.welcomeToTheMilitary.textparser.ParseResponse;
+import org.json.simple.JSONObject;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Random;
 
@@ -18,15 +20,38 @@ public class Fort_Bliss_Map {
     private String currentDependaLocation = null;
     private HashMap<String, String> itemBasedOnFacility = null;
 
+    private HashMap<String, Item> testItemBasedOnFacility = null;
+    private static GenerateItemHelper generateItemHelper = null;
+
 //    Constructor
     public Fort_Bliss_Map(String _name, String description){
         this.name = _name;
         this.description = description;
         setUpFacility();
         setUpItems();
+        // testSetItems();
     }
-
-
+    public void testSetItems() {
+        this.testItemBasedOnFacility = new HashMap<>();
+        try {
+            // items in hashmap
+            JSONObject itemsFromJSON  = generateItemHelper.getItemsFromJSONFile();
+            // System.out.println(itemsFromJSON);
+            String[] keysArr = Arrays.copyOf(itemsFromJSON.keySet().toArray(), itemsFromJSON.keySet().toArray().length, String[].class);
+            // loop through
+            for (int i = 0; i < keysArr.length; i++) {
+                JSONObject eachItem = (JSONObject) itemsFromJSON.get(keysArr[i]);
+                String itemName = String.valueOf(eachItem.get("name"));
+                String itemLocation = String.valueOf(eachItem.get("location"));
+                String description = String.valueOf(eachItem.get("description"));
+                String itemType = String.valueOf(eachItem.get("type"));
+                testItemBasedOnFacility.put(itemLocation, new Item(itemName, description, itemType));
+            }
+        } catch (NullPointerException e) {
+            System.out.println("Item is null: Fort Sill Map.class");
+            e.printStackTrace();
+        }
+    }
 
     // getter for item associated with the facility
     // param: building name
@@ -37,13 +62,13 @@ public class Fort_Bliss_Map {
     // method to prepare items associated to the facility
     // only being used in the fort bliss map class
     private void setUpItems() {
-        this.itemBasedOnFacility = new HashMap<>();
-        itemBasedOnFacility.put("Housing", new Item("BBQ").getName());
-        itemBasedOnFacility.put("Starbucks", new Item("Grande Caramel Frappe's").getName());
-        itemBasedOnFacility.put("Theater", new Item("Twizzlers").getName());
-        itemBasedOnFacility.put("Gym", new Item("Workout gloves").getName());
-        itemBasedOnFacility.put("Freedom Crossing (Mall)", new Item("Ray Bans sunglasses").getName());
-        itemBasedOnFacility.put("Restaurant", new Item("Buffalo Wings").getName());
+//        this.itemBasedOnFacility = new HashMap<>();
+//        itemBasedOnFacility.put("Housing", new Item("BBQ").getName());
+//        itemBasedOnFacility.put("Starbucks", new Item("Grande Caramel Frappe's").getName());
+//        itemBasedOnFacility.put("Theater", new Item("Twizzlers").getName());
+//        itemBasedOnFacility.put("Gym", new Item("Workout gloves").getName());
+//        itemBasedOnFacility.put("Freedom Crossing (Mall)", new Item("Ray Bans sunglasses").getName());
+//        itemBasedOnFacility.put("Restaurant", new Item("Buffalo Wings").getName());
     }
 
     // going to get all the solider based on the building that is passed by parameter

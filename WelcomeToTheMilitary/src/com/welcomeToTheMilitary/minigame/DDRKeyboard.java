@@ -75,10 +75,10 @@ public class DDRKeyboard implements iMinigame {
 
     // private playDDR to hide logic from public
     private boolean play(int randIndex) {
-        int ddrLife = 2;
+        int ddrLife = 1;
         int randomIndex = randIndex;
         StringBuilder strBuilder = new StringBuilder(DDR_OPTION[randomIndex]);
-        for (int i = 0; i < 5; i++) {
+        for (int i = 0; i < 3; i++) {
             // display word to type
             System.out.println("Memorize the String..");
             System.out.println(strBuilder.toString());

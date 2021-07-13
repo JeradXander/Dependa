@@ -1,0 +1,54 @@
+{
+  "Fort Sill": {
+    "1": {
+      "name": "blueberry_muffins",
+      "location": "dfac",
+      "description": "You hungry soldier? Eat up and heal your hp by 7",
+      "type": "consumable"
+    },
+    "2": {
+      "name": "chaplain's_voice",
+      "location": "church",
+      "description": "Holy! Holy! attack boss with holy power attack dmg + 2",
+      "type": "weapon"
+    },
+    "3": {
+      "name": "pt_belt",
+      "location": "gym",
+      "description": "Don't forget your PT Belt! increase attack dmg + 2",
+      "type": "weapon"
+    },
+    "4": {
+      "name": "hidden_protein_bar",
+      "location": "barracks",
+      "description": "No one will ever know, eat up heal your hp by 7",
+      "type": "consumable"
+    }
+  },
+  "Fort Bliss": {
+    "1": {
+      "name": "blackberry_muffins",
+      "location": "housing",
+      "description": "You hungry soldier? Eat up and heal your hp by 7",
+      "type": "consumable"
+    },
+    "2": {
+      "name": "missionary's_voice",
+      "location": "starbucks",
+      "description": "Holy! Holy! attack boss with holy power attack dmg + 2",
+      "type": "weapon"
+    },
+    "3": {
+      "name": "pt_vest",
+      "location": "theater",
+      "description": "Don't forget your PT Belt! increase attack dmg + 2",
+      "type": "weapon"
+    },
+    "4": {
+      "name": "hidden_protein_shake",
+      "location": "restaurant",
+      "description": "No one will ever know, eat up heal your hp by 7",
+      "type": "consumable"
+    }
+  }
+}

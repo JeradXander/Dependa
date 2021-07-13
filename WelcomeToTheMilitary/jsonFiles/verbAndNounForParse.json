@@ -14,8 +14,8 @@
         "laginus", "soko", "david", "stephen"]
     },
     "show": {
-      "synonym": ["display"],
-      "noun": ["map", "location", "buildings", "building"]
+      "synonym": ["display", "view"],
+      "noun": ["map", "location", "buildings", "building", "status", "inventory", "pcs", "requests"]
     },
     "help": {
       "synonym": ["advice"],
@@ -24,6 +24,10 @@
     "exit": {
       "synonym": ["quit"],
       "noun": ["game"]
+    },
+    "request": {
+      "synonym": ["ask", "volunteer"],
+      "noun": ["pcs", "move"]
     }
   },
   "Fort Bliss": {
@@ -37,8 +41,8 @@
         "ryan", "danny", "cody", "justin", "lambert", "andy", "stephen"]
     },
     "show": {
-      "synonym": ["display"],
-      "noun": ["map", "location", "buildings", "building"]
+      "synonym": ["display", "view"],
+      "noun": ["map", "location", "buildings", "building", "status", "inventory", "pcs", "requests"]
     },
     "help": {
       "synonym": ["advice"],
@@ -47,6 +51,10 @@
     "exit": {
       "synonym": ["quit"],
       "noun": ["game"]
+    },
+    "request": {
+      "synonym": ["ask", "volunteer"],
+      "noun": ["pcs", "move"]
     }
   }
 }
