@@ -29,7 +29,7 @@ public class HelpmeHelper {
                 System.out.println("Example " + eachInstruction + " example " + instructionSet.get("example").toString() + "\n");
             });
         } catch (IOException | ParseException e) {
-            e.printStackTrace();;
+            e.printStackTrace();
         }
     }
 }

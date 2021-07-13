@@ -26,6 +26,7 @@ public class TextParser {
     public ParseResponse receiveAction(String userActionInput, String post) {
         // trim the user action input
         boolean isValidActionInput = trimUserInput(userActionInput);
+        // remove for testing for purpose
         // boolean isOperableCommend = operateUserAction(isValidActionInput, post);
         boolean isOperableCommend = testOperateUserAction(isValidActionInput, post);
         if (isOperableCommend) {
@@ -34,6 +35,24 @@ public class TextParser {
         }
 
         // placeholder
+        // reset the noun and verb
+        this.verb = "";
+        this.noun = "";
+        return new ParseResponse(getNoun(), getVerb());
+    }
+
+    // for boss stage
+    // utilize the idea of method overloading to avoid logic changes
+    public ParseResponse receiveAction(String userActionInput, String post, String typeOfBossStage) {
+        // trim the user action input
+        boolean isValidActionInput = trimUserInput(userActionInput);
+        boolean isOperableCommend = testOperateUserAction(isValidActionInput, post, typeOfBossStage);
+        if (isOperableCommend) {
+            // return verbAndNoun;
+            return new ParseResponse(getNoun(), getVerb());
+        }
+        // placeholder
+        // reset the noun and verb
         this.verb = "";
         this.noun = "";
         return new ParseResponse(getNoun(), getVerb());
@@ -48,12 +67,6 @@ public class TextParser {
             this.verb = "";
             return false;
         }
-        if (userInput.equals("jun") || userInput.equals("jon") || userInput.equals("damian") || userInput.equals("jerad")) {
-            this.verb = "jun";
-            this.noun = "haha!";
-            return true;
-        }
-
         String trimmedInput = userInput.trim().toLowerCase();
         // split out to check if the sentence contains more then 2 words
         String splitTrimmedInput[] = trimmedInput.split(" ");
@@ -79,7 +92,7 @@ public class TextParser {
         }
         return true;
     }
-    // testing method to replace textparser
+
     private boolean testOperateUserAction(boolean isValidActionInput, String postType) {
         if (!isValidActionInput) {
             System.out.println("Formatting Error");
@@ -92,6 +105,30 @@ public class TextParser {
             isOperable = parserHelper.getCoreInstructionHelper(verbInput, nounInput, "Fort Sill");
         } else if (postType.equals("Fort Bliss")) {
             isOperable = parserHelper.getCoreInstructionHelper(verbInput, nounInput, "Fort Bliss");
+        }
+        if (isOperable) {
+            this.verb = parserHelper.getVerbFromHelper();
+            this.noun = parserHelper.getNounFromHelper();
+            return isOperable;
+        }
+        this.verb = parserHelper.getVerbFromHelper();
+        this.noun = parserHelper.getNounFromHelper();
+        return false;
+    }
+
+    // user action for the boss stage
+    private boolean testOperateUserAction(boolean isValidActionInput, String postType, String typeOfBossStage) {
+        if (!isValidActionInput) {
+            System.out.println("Formatting Error");
+            return false;
+        }
+        boolean isOperable = false;
+        String verbInput = this.verb;
+        String nounInput = this.noun;
+        if (postType.equals("Fort Sill")) {
+            isOperable = parserHelper.getBossInstructionHelper(verbInput, nounInput, typeOfBossStage);
+        } else if (postType.equals("Fort Bliss")) {
+            isOperable = parserHelper.getBossInstructionHelper(verbInput, nounInput, typeOfBossStage);
         }
         if (isOperable) {
             this.verb = parserHelper.getVerbFromHelper();

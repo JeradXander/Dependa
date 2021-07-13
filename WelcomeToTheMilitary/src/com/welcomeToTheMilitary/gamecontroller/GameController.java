@@ -1,6 +1,5 @@
 package com.welcomeToTheMilitary.gamecontroller;
 
-import com.welcomeToTheMilitary.attributes.Weapons;
 import com.welcomeToTheMilitary.bases.Fort_Bliss_Map;
 import com.welcomeToTheMilitary.bases.Fort_Sill_Map;
 import com.welcomeToTheMilitary.character.Enlisted;
@@ -14,11 +13,17 @@ import com.welcomeToTheMilitary.minigame.iMinigame;
 import com.welcomeToTheMilitary.textparser.ParseResponse;
 import com.welcomeToTheMilitary.textparser.TextParser;
 import com.welcomeToTheMilitary.tutorial.Welcome;
+import org.json.simple.JSONObject;
+import org.json.simple.parser.JSONParser;
+import org.json.simple.parser.ParseException;
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.util.*;
 
 public class GameController {
-
     private static ParseResponse response = null;
     private static TextParser parser = null;
     private static Fort_Sill_Map fortSill = new Fort_Sill_Map("Fort Sill", "Some post");
@@ -31,7 +36,6 @@ public class GameController {
             new FinalBoss("SFC", "Daniels", 1, 1);
     private static MinigameFactory gameFactory = new MinigameFactory();
     private static iMinigame minigame = null;
-    private static iMinigame rockPaperScissors = new RPC();
 
     public static void main(String[] args) {
 //        spellList.add("Bumper Sticker");
@@ -67,7 +71,6 @@ public class GameController {
             userAction = input.nextLine();
             response = parser.receiveAction(userAction, usrSM.getPostName());
             if (!(response.getVerb().equals("")) || !(response.getNoun().equals(""))) {
-                // System.out.println("Verb: " + response.getVerb());
                 try {
                     switch (response.getVerb().trim()) {
                         case "go":
@@ -81,6 +84,14 @@ public class GameController {
                             break;
                         case "help":
                             interactHelpRequest(response.getNoun(), usrSM);
+                            break;
+                        case "request":
+                            // method to retrieve all possible post
+                            String pcsSelect = getPossibleBuildingsForPCS(response.getNoun(), usrSM);
+                            usrSM.setPcsRequest(pcsSelect);
+                            System.out.println("You submitted the pcs form to " + pcsSelect);
+
+
                             break;
                         case "jun":
                             System.out.println("Good job");
@@ -100,11 +111,47 @@ public class GameController {
         } // end of if statement
     } // end of while loop
 
+    // private method to get possible buildings for pcs
+    private static String getPossibleBuildingsForPCS(String noun, ServiceMember usrSM) {
+        InputStream locationJSONFile = GameController.class.getResourceAsStream("/locations.json");
+        JSONParser parserForLocation = new JSONParser();
+        try (BufferedReader reader = new BufferedReader(new InputStreamReader(locationJSONFile))) {
+            JSONObject locationObj = (JSONObject) parserForLocation.parse(reader);
+            String[] keysArrItem = Arrays.copyOf(locationObj.keySet().toArray(), locationObj.keySet().toArray().length, String[].class);
+            ArrayList<String> pcsLocationList = new ArrayList<>();
+            Scanner pcsInput = new Scanner(System.in);
+            int whileInt = 0;
+            while (whileInt == 0) {
+                System.out.println("Please type in the number associated with the post you would like to move to: ");
+                int x = 1;
+
+                for (String key : keysArrItem) {
+                    System.out.println(x + ". " + key);
+                    x++;
+                }
+
+                try{
+                    int pcsSelection = pcsInput.nextInt();
+
+                    if(pcsSelection > 0 && pcsSelection < keysArrItem.length +1) {
+                        pcsSelection--;
+                        return keysArrItem[pcsSelection];
+                    }
+                }catch (InputMismatchException ignored){
+
+                }
+            }
+
+        } catch (IOException | ParseException e) {}
+        return "";
+    }
+
+
     // generate random game
     private static String prepareRandomGame() {
         ArrayList<String> gameList = new ArrayList<>();
         gameList.add("rock paper scissors");
-        gameList.add("memorization game");
+        // gameList.add("memorization game");
         final int min = 0;
         final int max = gameList.size();
         int randomIndex = (int) (Math.random() * (max - min));
@@ -169,13 +216,73 @@ public class GameController {
             System.out.println("Win or lose: " + isWin);
             if (isWin) {
                 if (usrSM.getPostName().equals("Fort Sill")){
-                usrSM.storeItemInVentory(fortSill.getItemFromFacility(usrSM.getLocation()));
-                boolean isWorthRank = PromoteHelper.isRankWorthItFortSill(usrSM, solider);
-                if (isWorthRank) {
-                    usrSM.setRank(solider.getRank());
-                    System.out.println("Congrats you won the interaction.\n" +
-                            "Obtained item: " + fortSill.getItemFromFacility(usrSM.getLocation()) + "\n" +
-                            "Player's current rank: " + usrSM.getRank());
+                    // TODO: initialize item using JSON is done, work on store it in the inventory
+                    usrSM.storeItemInVentory(fortSill.showItemInTheFacilityTest(usrSM.getLocation()));
+                    boolean isWorthRank = PromoteHelper.isRankWorthItFortSill(usrSM, solider);
+                    if (isWorthRank) {
+                        usrSM.setRank(solider.getRank());
+                        System.out.println("Congrats you won the interaction.\n" +
+                                "Obtained item: " + fortSill.showItemInTheFacilityTest(usrSM.getLocation()) + "\n" +
+                                "Player's current rank: " + usrSM.getRank() + "\nObtained item can be used during final" +
+                                "combat during the Boss stage.");
+                    }
+                } else if (usrSM.getPostName().equals("Fort Bliss")){
+//                    need to create items
+                    System.out.println("No items available in Fort Bliss currently.");
+                }
+                else {
+                    System.out.println("Congrats you won the interaction.");
+                    System.out.println("You decided not to take their rank\n" + "It is lower than yours yuck!");
+                }
+            } else {
+                System.out.println("You have lost. You maintain your rank but lost your dignity!!!");
+                System.out.println("You lost 5 hp");
+                if (usrSM.getHealth() <= 0) {
+                    System.out.println("You got article 15..");
+                    System.out.println("Separation package...\nBye");
+                    System.exit(0);
+                }
+                usrSM.setHealth(5, false);
+                if (usrSM.getHealPotion() > 0) {
+                    System.out.println("Would you like to heal?");
+                    // yes or no
+                    Scanner healInput = new Scanner(System.in);
+                    String healAnswer = healInput.nextLine().toLowerCase();
+                    while (!healAnswer.equals("yes") && !healAnswer.equals("no") && !healAnswer.equals("y")
+                            && !healAnswer.equals("n")) {
+                        System.out.println("Please enter yes/y or no/n.");
+                        healAnswer = healInput.nextLine().toLowerCase();
+                    }
+                    if (healAnswer.equals("yes") || healAnswer.equals("y")){
+                        usrSM.setHealth(15, true);
+                        System.out.println("You used the healing potion and healed by 15");
+                        usrSM.setHealPotion();
+                        System.out.println("Your current health is " + usrSM.getHealth() + "\nYou now have " + usrSM.getHealPotion() + " heal potion");
+
+                    }
+                } else {
+                    System.out.println("You have no health potion");
+                }
+            }
+            return;
+        } else if (senior != null){
+            System.out.println("Targeting:" + noun);
+            System.out.println("You finally saw " + senior.getName() + "'s rank!\nIt is " + senior.getRank());
+            // game start
+            // boolean isWin = rockPaperScissors.play();
+            minigame = gameFactory.playGame(prepareRandomGame());
+            boolean isWin = minigame.play();
+            System.out.println("Win or lose: " + isWin);
+            if (isWin) {
+                if (usrSM.getPostName().equals("Fort Bliss")){
+                    // TODO: FortBliss is not implemented yet
+                    // usrSM.storeItemInVentory(fortBliss.(usrSM.getLocation()));
+                    boolean isWorthRank = PromoteHelper.isRankWorthItForBliss(usrSM, senior);
+                    if (isWorthRank) {
+                        usrSM.setRank(senior.getRank());
+                        System.out.println("Congrats you won the interaction.\n" +
+                                "Obtained item: " + fortBliss.getItemFromFacility(usrSM.getLocation()) + "\n" +
+                                "Player's current rank: " + usrSM.getRank());
                     }
                 } else if (usrSM.getPostName().equals("Fort Bliss")){
 //                    need to create items
@@ -189,37 +296,7 @@ public class GameController {
                 System.out.println("You have lost. You maintain your rank but lost your dignity!!!");
             }
             return;
-        } else if (senior != null){
-                System.out.println("Targeting:" + noun);
-                System.out.println("You finally saw " + senior.getName() + "'s rank!\nIt is " + senior.getRank());
-                // game start
-                // boolean isWin = rockPaperScissors.play();
-                minigame = gameFactory.playGame(prepareRandomGame());
-                boolean isWin = minigame.play();
-                System.out.println("Win or lose: " + isWin);
-                if (isWin) {
-                    if (usrSM.getPostName().equals("Fort Bliss")){
-                        usrSM.storeItemInVentory(fortBliss.getItemFromFacility(usrSM.getLocation()));
-                        boolean isWorthRank = PromoteHelper.isRankWorthItForBliss(usrSM, senior);
-                        if (isWorthRank) {
-                            usrSM.setRank(senior.getRank());
-                            System.out.println("Congrats you won the interaction.\n" +
-                                    "Obtained item: " + fortBliss.getItemFromFacility(usrSM.getLocation()) + "\n" +
-                                    "Player's current rank: " + usrSM.getRank());
-                        }
-                    } else if (usrSM.getPostName().equals("Fort Bliss")){
-//                    need to create items
-                        System.out.println("No items available in Fort Bliss currently.");
-                    }
-                    else {
-                        System.out.println("Congrats you won the interaction.");
-                        System.out.println("You decided not to take their rank\n" + "It is lower than yours yuck!");
-                    }
-                } else {
-                    System.out.println("You have lost. You maintain your rank but lost your dignity!!!");
-                }
-                return;
-            }
+        }
         System.out.println("Cannot find the soldier you are looking for");
         return;
     }
@@ -236,12 +313,54 @@ public class GameController {
     }
 
     private static void displayBuildings(String noun, ServiceMember usrDep) {
-        switch (noun) {
-//            add buildings
-            default:
-                System.out.println("These are the possible location you can go!!");
-                System.out.println(fortSill.getBuildings());
-                break;
+        if (usrDep.getPostName().equals("Fort Sill")) {
+            switch (noun) {
+                case "map":
+                case "buildings":
+                    System.out.println(fortSill.getBuildings());
+                    return;
+                case "building":
+                case "location":
+                    // System.out.println(fo)
+                    System.out.println("You are currently in " + usrDep.getLocation() + ", at Fort Sill");
+                    // System.out.println("You s");
+                    return;
+                case "status":
+                    System.out.println("=".repeat(10) + " Status Report " + "=".repeat(10));
+                    System.out.println("Player name: " + usrDep.getName());
+                    System.out.println("Player rank: " + usrDep.getRank());
+                    System.out.println("Player's special: " + usrDep.getSpecial());
+                    System.out.println("Player health: " + usrDep.getHealth());
+                    System.out.println("Player attack damage: " + usrDep.getStrength());
+                    System.out.println("Player's inventory:");
+                    System.out.println("Player's Permanent Change of Station request: " + usrDep.getPcsRequest());
+                    usrDep.viewMyInventory();
+                    return;
+                case "inventory":
+                    usrDep.viewMyInventory();
+                    return;
+
+                default:
+                    System.out.println("These are the possible location you can go!!");
+                    break;
+            }
+        } else if (usrDep.getPostName().equals("Fort Bliss")) {
+            switch (noun) {
+                case "map":
+                case "buildings":
+                    System.out.println(fortSill.getBuildings());
+                    return;
+                case "building":
+                case "location":
+                    // System.out.println(fo)
+                    return;
+                case "status":
+                case "inventory":
+                    return;
+                default:
+                    System.out.println("These are the possible location you can go!!");
+                    break;
+            }
         }
     }
 
@@ -257,12 +376,9 @@ public class GameController {
                 case "market":
                     System.out.println("Entering: " + noun + " building");
                     fortSill.enterToBuilding(noun);
-//                fortBliss.enterToBuilding(noun);
-//                setDependaLocation(noun, usrDep);
                     usrSM.setLocation(noun);
                     System.out.println("Current " + usrSM.getName() + "'s location: " + usrSM.getLocation());
                     break;
-
                 default:
                     System.out.println("These are the possible location you can go!!");
                     System.out.println(fortSill.getBuildings());
@@ -277,9 +393,7 @@ public class GameController {
                 case "theater":
                 case "mall":
                     System.out.println("Entering: " + noun + " building");
-//                    fortSill.enterToBuilding(noun);
-                fortBliss.enterToBuilding(noun);
-//                setDependaLocation(noun, usrDep);
+                    fortBliss.enterToBuilding(noun);
                     usrSM.setLocation(noun);
                     System.out.println("Current " + usrSM.getName() + "'s location: " + usrSM.getLocation());
                     break;
@@ -288,7 +402,6 @@ public class GameController {
                     System.out.println("These are the possible location you can go!!");
                     System.out.println(fortSill.getBuildings());
                     break;
-
             }
         }
     }

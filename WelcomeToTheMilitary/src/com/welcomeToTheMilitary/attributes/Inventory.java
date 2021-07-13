@@ -7,11 +7,23 @@ import java.util.Map;
 public class Inventory {
     private Map<String, Item> inventory = new HashMap<>();
 
+    public boolean isInventoryEmpty() {
+        return inventory.isEmpty();
+    }
+
     public void addItem(Item item){
         if(!inventory.containsKey(item.getName())){
             inventory.put(item.getName(), item);
 //            System.out.println("From Inventory class: " + this.inventory);
         }
+    }
+
+    public Item getItem(String itemname) {
+        if (!inventory.containsKey(itemname)) {
+            System.out.println("Cannot find the item in my inventory");
+            return null;
+        }
+        return inventory.get(itemname);
     }
 
     // method to print existing items in inventory
@@ -32,24 +44,10 @@ public class Inventory {
         return inventory.containsKey(_itemName);
     }
 
-    public boolean isInventoryEmpty() {
-        return inventory.isEmpty();
-    }
-
-    public String checkInventory(){
-        StringBuilder builder = new StringBuilder();
-        List<Item> items = (List<Item>) inventory.values();
-        for(Item item : items){
-            builder.append(item.getName());
-            if(item instanceof Weapons){
-                Weapons weapon = (Weapons)item;
-                Attributes attribute = weapon.getAt();
-                builder.append(attribute.getStrength());
-//                builder.append(attribute.getSpells());
-//                builder.append(attribute.getHealth
-            }
-            builder.append(item.getAmount());
-        }
-        return builder.toString();
+    @Override
+    public String toString() {
+        return "Inventory{" +
+                "inventory=" + inventory +
+                '}';
     }
 }

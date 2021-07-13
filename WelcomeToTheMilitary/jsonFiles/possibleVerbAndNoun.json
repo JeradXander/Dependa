@@ -16,15 +16,17 @@
 
     "Display map": {
       "verb": ["show", "display"],
-      "noun": ["map", "location", "buildings", "building"],
-      "example": "Example: | display map | show map"
+      "noun": ["map", "location", "buildings", "building", "status", "inventory", "pcs", "requests"],
+      "example": "Example: | display map | show map | show status"
     },
 
     "Exit the game": {
       "verb": ["exit", "quit"],
       "noun": ["game"],
       "example": "Example: | exit game | quit game"
-    }
+    },
+
+
   },
   "Fort Bliss": {
     "Movement": {
@@ -42,8 +44,8 @@
 
     "Display map": {
       "verb": ["show", "display"],
-      "noun": ["map", "location", "buildings", "building"],
-      "example": "Example: | display map | show map"
+      "noun": ["map", "location", "buildings", "building", "status", "inventory", "pcs", "requests"],
+      "example": "Example: | display map | show map | show status"
     },
 
     "Exit the game": {
