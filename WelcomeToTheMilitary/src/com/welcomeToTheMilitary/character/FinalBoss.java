@@ -1,6 +1,5 @@
 package com.welcomeToTheMilitary.character;
 
-import com.welcomeToTheMilitary.attributes.Weapons;
 import java.util.Random;
 
 public class FinalBoss{

@@ -5,6 +5,7 @@ import com.welcomeToTheMilitary.character.Enlisted;
 import com.welcomeToTheMilitary.character.WarrantOfficer;
 import com.welcomeToTheMilitary.textparser.ParseResponse;
 import com.welcomeToTheMilitary.textparser.TextParser;
+import org.json.simple.JSONObject;
 
 import java.util.*;
 
@@ -18,13 +19,47 @@ public class Fort_Sill_Map {
     private String currentDependaLocation = null;
     private HashMap<String, String> itemBasedOnFacility = null;
 
+    // TEST ITEM
+    private HashMap<String, Item> testItemBasedOnFacility = null;
+    private static GenerateItemHelper generateItemHelper = null;
+    // End of TEST ITEM
 
 //    Constructor
     public Fort_Sill_Map(String _name, String description){
         this.name = _name;
         this.description = description;
+        generateItemHelper = new GenerateItemHelper();
         setUpFacility();
-        setUpItems();
+        testSetItems();
+    }
+
+    // test method
+    public Item showItemInTheFacilityTest(String facility) {
+        return testItemBasedOnFacility.get(facility);
+    }
+
+    // test setting up the item
+    public void testSetItems() {
+        this.testItemBasedOnFacility = new HashMap<>();
+        try {
+            // items in hashmap
+            JSONObject itemsFromJSON  = generateItemHelper.getItemsFromJSONFile();
+            // System.out.println(itemsFromJSON);
+            // TODO: iterate and add into the hashmap
+            String[] keysArr = Arrays.copyOf(itemsFromJSON.keySet().toArray(), itemsFromJSON.keySet().toArray().length, String[].class);
+            // loop through
+            for (int i = 0; i < keysArr.length; i++) {
+                JSONObject eachItem = (JSONObject) itemsFromJSON.get(keysArr[i]);
+                String itemName = String.valueOf(eachItem.get("name"));
+                String itemLocation = String.valueOf(eachItem.get("location"));
+                String description = String.valueOf(eachItem.get("description"));
+                String itemType = String.valueOf(eachItem.get("type"));
+                testItemBasedOnFacility.put(itemLocation, new Item(itemName, description, itemType));
+            }
+        } catch (NullPointerException e) {
+            System.out.println("Item is null: Fort Sill Map.class");
+            e.printStackTrace();
+        }
     }
 
     // getter for item associated with the facility
@@ -35,14 +70,14 @@ public class Fort_Sill_Map {
 
     // method to prepare items associated to the facility
     // only being used in the fort sill map class
-    private void setUpItems() {
-        this.itemBasedOnFacility = new HashMap<>();
-        itemBasedOnFacility.put("dfac", new Item("Dehydrate Eggs").getName());
-        itemBasedOnFacility.put("px", new Item("Mechanix gloves").getName());
-        itemBasedOnFacility.put("church", new Item("chaplain's voice").getName());
-        itemBasedOnFacility.put("gym", new Item("PT Belt").getName());
-        itemBasedOnFacility.put("barracks", new Item("Dentist Appointment Slip").getName());
-    }
+//    private void setUpItems() {
+//        this.itemBasedOnFacility = new HashMap<>();
+//        itemBasedOnFacility.put("dfac", new Item("Dehydrate Eggs").getName());
+//        itemBasedOnFacility.put("px", new Item("Mechanix gloves").getName());
+//        itemBasedOnFacility.put("church", new Item("chaplain's voice").getName());
+//        itemBasedOnFacility.put("gym", new Item("PT Belt").getName());
+//        itemBasedOnFacility.put("barracks", new Item("Dentist Appointment Slip").getName());
+//    }
 
     // method to grab name of the post
     public String getName() {
@@ -272,22 +307,4 @@ private ArrayList<WarrantOfficer> warrantsInBliss(){
 //      return  enterBuildingController( ParseResponse);
 //    return new Fort_Sill_Map(building_description,false);
     }
-//
-//
-//
-
-    public static void main(String[] args) {
-        // pre-setup
-        ParseResponse response = null;
-        TextParser textParser = new TextParser();
-        response = textParser.receiveAction("go to dfac", "Fort Sill");
-
-
-        Fort_Sill_Map fort_sill_map = new Fort_Sill_Map("Fort Sill", "");
-//        fort_sill_map.enterToBuilding("dfac");
-//        fort_sill_map.enterToBuilding("church");
-        fort_sill_map.enterBuildingController(response);
-    }
-
-
 }
